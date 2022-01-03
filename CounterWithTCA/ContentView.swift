@@ -1,16 +1,20 @@
-//
-//  ContentView.swift
-//  CounterWithTCA
-//
-//  Created by 廣川昂紀 on 2022/01/03.
-//
-
+import ComposableArchitecture
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        AppView(
+            store: .init(
+                initialState: AppState(),
+                reducer: appReducer,
+                environment: .init(
+                    mainQueue: .main,
+                    numberFact: { number in
+                        Effect(value: "\(number) is a good number Brent")
+                    }
+                )
+            )
+        )
     }
 }
 
